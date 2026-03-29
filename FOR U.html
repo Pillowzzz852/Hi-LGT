@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For You ❤️</title>
+<style>
+    body {
+        margin: 0;
+        font-fam    ily: 'Segoe UI', sans-serif;
+        background: linear-gradient(to right, #fff9c4, #ffe082);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+    }
+    #letter {
+    text-align: justify;
+}
+    .container {
+        text-align: center;
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        max-width: 520px;
+        position: relative;
+        z-index: 2;
+    }
+
+    h1 { color: #f4b400; }
+
+    p { display: none; margin-top: 20px; min-height: 120px; }
+
+    button {
+        background: #f4b400;
+        border: none;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 25px;
+        cursor: pointer;
+    }
+
+    .gallery {
+        display: none;
+        margin-top: 20px;
+    }
+
+    .gallery img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        margin: 5px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.3s;
+    }
+
+    .gallery img:hover {
+        transform: scale(1.1);
+    }
+
+    .viewer {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0,0,0,0.8);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 5;
+    }
+
+    .viewer img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 15px;
+    }
+
+    .emoji {
+        position: absolute;
+        animation: float 6s linear infinite;
+    }
+
+    @keyframes float {
+        0% { transform: translateY(100vh); opacity: 1; }
+        100% { transform: translateY(-10vh); opacity: 0; }
+    }
+
+    .burst {
+        position: absolute;
+        font-size: 30px;
+        animation: burst 1s ease-out forwards;
+    }
+
+    @keyframes burst {
+        0% { transform: scale(0); opacity: 1; }
+        100% { transform: scale(2) translateY(-100px); opacity: 0; }
+    }
+
+    .music-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 999;
+    background: #f4b400;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.music-btn:hover {
+    transform: scale(1.1);
+}
+
+</style>
+</head>
+<body>
+
+<div class="container" id="loginBox">
+    <h1>Enter Password 🫵😛</h1>
+    <h6>Your birthday is the key 😉</h6>
+    <input type="password" id="password" placeholder="Enter password">
+    <br><br>
+    <button onclick="checkPassword()">Enter</button>
+</div>
+
+<div class="container" id="mainContent" style="display:none;">
+    <h1>For You 🌻</h1>
+
+    <button onclick="showContent()">Open Letter</button>
+
+    <p id="letter"></p>
+ 
+    <div class="gallery" id="gallery">
+        <img src="/ASSETS/received_776313614046699.jpeg" onclick="openViewer(this.src)">
+        <img src="/ASSETS/photo_6215426102839152149_x.jpg" onclick="openViewer(this.src)">
+        <img src="/ASSETS/received_714004144234714.jpeg" onclick="openViewer(this.src)">
+        <img src="/ASSETS/IMG_20230508_201413.jpg" onclick="openViewer(this.src)">
+        <img src="/ASSETS/IMG20230513154626.jpg" onclick="openViewer(this.src)">
+        <img src="/ASSETS/IMG20230512160542 (1).jpg" onclick="openViewer(this.src)">
+        <img src="/ASSETS/photo_6215426102839152165_y.jpg" onclick="openViewer(this.src)">
+        <img src="/ASSETS/photo_6215426102839152159_y.jpg" onclick="openViewer(this.src)">
+        <img src="/ASSETS/IMG20230513172824.jpg" onclick="openViewer(this.src)">
+        <img src="/ASSETS/photo_6215426102839152158_y.jpg" onclick="openViewer(this.src)">
+        <img src="/ASSETS/photo_6215426102839152166_y.jpg" onclick="openViewer(this.src)">
+        <img src="/ASSETS/IMG20230715173149.jpg" onclick="openViewer(this.src)">
+    </div>
+
+    <button class="music-btn" onclick="toggleMusic()">🎵</button>
+
+    <iframe style="display:none;" id="music"
+        src="https://open.spotify.com/embed/track/1hJtJvPX9knMysNDQw0HDJ?utm_source=generator"
+        width="100%" height="80" frameborder="0"
+        allow="autoplay; encrypted-media">
+    </iframe>
+
+    <audio id="bgMusic"loop>
+        <source src="/ASSETS/CHFILWU.mp3" type="audio/mpeg">
+    </audio>
+</div>
+
+<div class="viewer" id="viewer" onclick="closeViewer()">
+    <img id="viewerImg">
+</div>
+
+<script>
+const message = `Hi Gail! ${name} 🌻
+
+Hi gail!
+
+#3 Mirasol
+
+Kay, tagal na rin pala mula nang tayo'y magkita
+Paborito mo pa rin ba ang lila?
+Nag-aalaga ka pa rin ba ng mga pusa?
+Marahil iba ka na, ngunit ang mga paborito mong mirasol ay tanda ko pa                           
+
+Iba ka na, baka nga iba na ang iyong mga gusto
+Ang liwanag ng yong mga ngiti ay sing kinang pa rin ng mga ginto
+At kahit kaila'y hindi ako nito binigo
+Ikaw pa rin talaga ang hanap ng hibang kong puso
+
+full letter
+https://docs.google.com/document/d/15pQYmkN0zKscSnor3_c4mZo2BYsq6b6yX_TUZcTfj9g/edit?usp=sharing
+
+`;
+
+function checkPassword() {
+    const pass = document.getElementById("password").value;
+    if(pass === "090307") {
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("mainContent").style.display = "block";
+        surpriseEffect();
+    } else {
+        alert("ENGKK MALI TRY AGAIN!😉 hint: mm/dd/yy");
+    }
+}
+
+function showContent() {
+    document.getElementById("letter").style.display = "block";
+    document.getElementById("gallery").style.display = "block";
+    document.getElementById("music").style.display = "block";
+    document.getElementById("bgMusic").play();
+    typeWriter();
+}
+
+function toggleMusic() {
+    let music = document.getElementById("bgMusic");
+    if (music.paused) {
+        music.play();
+    } else {
+        music.pause();
+    }
+}
+
+let i = 0;
+function typeWriter() {
+    if (i < message.length) {
+        document.getElementById("letter").innerHTML += message.charAt(i) === '\n' ? '<br>' : message.charAt(i);
+        i++;
+        setTimeout(typeWriter, 30);
+    }
+}
+
+function openViewer(src) {
+    document.getElementById("viewer").style.display = "flex";
+    document.getElementById("viewerImg").src = src;
+}
+
+function closeViewer() {
+    document.getElementById("viewer").style.display = "none";
+}
+
+setInterval(() => {
+    let emoji = document.createElement("div");
+    const emojis = ["🐱","🌻"];
+    emoji.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
+    emoji.classList.add("emoji");
+    emoji.style.left = Math.random()*100 + "vw";
+    emoji.style.fontSize = (Math.random()*20 + 20) + "px";
+    document.body.appendChild(emoji);
+
+    setTimeout(() => emoji.remove(), 6000);
+}, 400);
+
+function surpriseEffect() {
+    for(let j=0; j<20; j++) {
+        let el = document.createElement("div");
+        el.innerHTML = "💛";
+        el.classList.add("burst");
+        el.style.left = Math.random()*100 + "%";
+        el.style.top = Math.random()*100 + "%";
+        document.body.appendChild(el);
+
+        setTimeout(() => el.remove(), 1000);
+    }
+}
+</script>
+
+</body>
+</html>
